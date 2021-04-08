@@ -1,10 +1,15 @@
-from ticker import TimeTicker
+import sys
+from pathlib import Path
+sys.path.append(Path.cwd().parent.as_posix())
+sys.path.append(Path.cwd().as_posix())
+
+from tic import Tic
 
 # main.py
 
 if __name__=="__main__":
     # Initialization
-    rt = TimeTicker(no_seconds_display=False)
+    rt = Tic()
 
     # Some long process that takes time...
     from time import sleep

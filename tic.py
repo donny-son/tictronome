@@ -1,26 +1,33 @@
 from threading import Timer
 
-class TimeTicker:
-    """A custom ticker that use a different thread to show if your interpreter is running.
+class Tic:
+    """Different thread to show if your interpreter is running.
 
     May or maynot relieve stress when waiting for a long function to run.
 
     Usage:
-        1. Initialize the TimeTicker. This will start the timer.
-        2. Stop the TimeTicker at a desired location.
+        1. Initialize the Tic. This will start the timer.
+        2. Stop the Tic at a desired location.
 
     methods:
-        stop: Stops TimeTicker.
+        stop: Stops Tic.
+    
+    Example:
+        >>> from tic import Tic  # import Tic class
+        >>> tic = Tic(0.1, print_seconds=False)  # initialize before a long function call
+        >>> some_long_function_to_process(...)  # the long function call
+        >>> tic.stop()  # end of script or wherever you want it to end
+        
     """
-    def __init__(self, interval=0.1, no_seconds_display=True):
+    def __init__(self, interval=0.1, print_seconds=False):
         """
         Args:
             interval=0.1 (float or int): The interval of refresh time for prints.
-            no_seconds_display=True (bool): If true, prints oscillating slashes, else, prints seconds.
+            print_seconds=True (bool): If false, prints oscillating slashes, else, prints seconds.
         """
-        self._timer     = None
-        self.interval   = interval
-        self.use_ticks = no_seconds_display
+        self._timer = None
+        self.interval = interval
+        self.print_seconds = print_seconds
         self.is_running = False
         self.time = 0
         self._start()
@@ -34,7 +41,7 @@ class TimeTicker:
             self._timer = Timer(self.interval, self._run)
             self._timer.start()
             self.time += 1
-            if self.use_ticks:
+            if not self.print_seconds:
                 if self.time % 2:
                     print("Running", '/', end="\r", sep="...", flush=True)
                 else:
@@ -46,14 +53,3 @@ class TimeTicker:
     def stop(self):
         self._timer.cancel()
         self.is_running = False
-
-if __name__=="__main__":
-    # Initialization
-    rt = TimeTicker(no_seconds_display=True)
-
-    # Some long process that takes time...
-    from time import sleep
-    sleep(5)
-    # The End
-    rt.stop()
-
