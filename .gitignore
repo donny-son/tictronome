@@ -1,3 +1,4 @@
 .DS_Store
 .vscode
 __pycache__/ticker.cpython-39.pyc
+__pycache__/
