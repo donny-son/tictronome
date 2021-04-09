@@ -53,3 +53,13 @@ class Tic:
     def stop(self):
         self._timer.cancel()
         self.is_running = False
+
+
+if __name__=="__main__":
+    print("TEST RUN FOR 5 SECONDS")
+
+    tc = Tic()
+    import time
+    time.sleep(5)
+    
+    tc.stop()

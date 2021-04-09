@@ -3,7 +3,7 @@ from pathlib import Path
 sys.path.append(Path.cwd().parent.as_posix())
 sys.path.append(Path.cwd().as_posix())
 
-from tic import Tic
+from tictronome import Tic
 
 # main.py
 
