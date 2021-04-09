@@ -3,15 +3,21 @@
 We've all been there...staring at the empty terminal while your fans go crazy.  
 I hope this relieves the intensity while you are waiting for that return statement.
 
-![Simple Ticks](assets/simple-tics.gif)
-![Seconds](assets/seconds.gif)
+<img src="assets/simple-tics.gif" width="250"/>
+<img src="assets/seconds.gif" width="250"/>
 
 ## How To
+
+0. Install `tictronome` from `pip`
+
+```{shell}
+$ pip install tictronome
+```
 
 1. Import `Tic` object from `tictronome`.
 
 ```{python}
-from tictronome import Tic
+from tictronome.tictronome import Tic
 ```
 
 2. Initialize it before some time-consuming process.
