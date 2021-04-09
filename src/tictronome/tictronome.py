@@ -60,6 +60,7 @@ class Tic:
     def start(self):
         self._timer = threading.Thread(target=self._print_out_loading_msg)
         self._timer.start()
+        return self
 
     def stop(self):
         self._is_running = False
@@ -70,7 +71,6 @@ if __name__ == "__main__":
 
     print("TEST RUN FOR 10 SECONDS")
 
-    tc = Tic(color=Colors.CYAN)
-    tc.start()
-    time.sleep(10)
+    tc = Tic(color=Colors.CYAN).start()
+    time.sleep(5)
     tc.stop()
