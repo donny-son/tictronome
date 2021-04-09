@@ -1,17 +1,22 @@
-from threading import Timer
+import threading
+from typing import Optional
+from colors import Colors, ColoredString
+from time import sleep
 
 
 class Tic:
     """Different thread to show if your interpreter is running.
 
-    May or maynot relieve stress when waiting for a long function to run.
+    May or may not relieve stress when waiting for a long function to run.
 
     Usage:
-        1. Initialize the Tic. This will start the timer.
+        1. Initialize the Tic.
+        2. Invokes the start method at the point where the code starts.
         2. Stop the Tic at a desired location.
 
     methods:
-        stop: Stops Tic.
+        start: Start Tic.
+        stop: Stop Tic.
     
     Example:
         from tic import Tic  # import Tic class
@@ -21,48 +26,51 @@ class Tic:
         
     """
 
-    def __init__(self, interval=0.1, print_seconds=False):
+    def __init__(self, interval=0.1, print_seconds=False, color: Optional[str] = None):
         """
         Args:
             interval=0.1 (float or int): The interval of refresh time for prints.
             print_seconds=True (bool): If false, prints oscillating slashes, else, prints seconds.
         """
         self._timer = None
-        self.interval = interval
-        self.print_seconds = print_seconds
-        self.is_running = False
-        self.time = 0
-        self._start()
+        self._is_running = True
+        self._interval = interval
+        self._print_seconds = print_seconds
+        self._color = color
 
-    def _run(self):
-        self.is_running = False
-        self._start()
+    def _print(self, print_control_num: int):
+        loading_msg = "\rRunning..."
 
-    def _start(self):
-        if not self.is_running:
-            self._timer = Timer(self.interval, self._run)
-            self._timer.start()
-            self.time += 1
-            if not self.print_seconds:
-                if self.time % 2:
-                    print("\rRunning", '/', end='', sep="...", flush=True)
-                else:
-                    print("\rRunning", '\\', end='', sep="...", flush=True)
-            else:
-                print("Seconds Passed", self.time / 10, end="\r", sep="...", flush=True)
-            self.is_running = True
+        def p(s):
+            return print(ColoredString(s, color=self._color).string, end='', flush=True)
+
+        if not self._print_seconds:
+            if print_control_num % 2:
+                return p(f"{loading_msg}/")
+            return p(f"{loading_msg}\\")
+        return p(f"{loading_msg} {print_control_num / 10}")
+
+    def _print_out_loading_msg(self):
+        print_control_num = 0
+        while self._is_running:
+            self._print(print_control_num)
+            print_control_num += 1
+            sleep(self._interval)
+
+    def start(self):
+        self._timer = threading.Thread(target=self._print_out_loading_msg)
+        self._timer.start()
 
     def stop(self):
-        self._timer.cancel()
-        self.is_running = False
+        self._is_running = False
 
 
 if __name__ == "__main__":
-    print("TEST RUN FOR 5 SECONDS")
-
-    tc = Tic()
     import time
 
-    time.sleep(5)
+    print("TEST RUN FOR 10 SECONDS")
 
+    tc = Tic(color=Colors.CYAN)
+    tc.start()
+    time.sleep(10)
     tc.stop()
