@@ -3,6 +3,9 @@
 We've all been there...staring at the empty terminal while your fans go crazy.  
 I hope this relieves the intensity while you are waiting for that return statement.
 
+![Simple Ticks](assets/simple-tics.gif)
+![Seconds](assets/seconds.gif)
+
 ## How To
 
 1. Import `Tic` object from `tictronome`.
