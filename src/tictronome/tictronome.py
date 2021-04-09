@@ -1,5 +1,6 @@
 from threading import Timer
 
+
 class Tic:
     """Different thread to show if your interpreter is running.
 
@@ -13,12 +14,13 @@ class Tic:
         stop: Stops Tic.
     
     Example:
-        >>> from tic import Tic  # import Tic class
-        >>> tic = Tic(0.1, print_seconds=False)  # initialize before a long function call
-        >>> some_long_function_to_process(...)  # the long function call
-        >>> tic.stop()  # end of script or wherever you want it to end
+        from tic import Tic  # import Tic class
+        tic = Tic(0.1, print_seconds=False)  # initialize before a long function call
+        some_long_function_to_process(...)  # the long function call
+        tic.stop()  # end of script or wherever you want it to end
         
     """
+
     def __init__(self, interval=0.1, print_seconds=False):
         """
         Args:
@@ -43,11 +45,11 @@ class Tic:
             self.time += 1
             if not self.print_seconds:
                 if self.time % 2:
-                    print("Running", '/', end="\r", sep="...", flush=True)
+                    print("\rRunning", '/', end='', sep="...", flush=True)
                 else:
-                    print("Running", '\\', end="\r", sep="...", flush=True)
+                    print("\rRunning", '\\', end='', sep="...", flush=True)
             else:
-                    print("Seconds Passed", self.time / 10, end="\r", sep="...", flush=True)
+                print("Seconds Passed", self.time / 10, end="\r", sep="...", flush=True)
             self.is_running = True
 
     def stop(self):
@@ -55,11 +57,12 @@ class Tic:
         self.is_running = False
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     print("TEST RUN FOR 5 SECONDS")
 
     tc = Tic()
     import time
+
     time.sleep(5)
-    
+
     tc.stop()
