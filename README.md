@@ -27,6 +27,13 @@ tic = Tic()
 some_long_function(...)
 ```
 
+3. Call the `start` method of `Tic` to start.
+
+```{python}
+# start of your script
+tic.start()
+```
+
 3. Call the `stop` method of `Tic` to stop.
 
 ```{python}
@@ -39,3 +46,13 @@ tic.stop()
 ```{shell}
 $ python3 your_script.py
 ```
+
+
+### Notes
+When you create a Tic instance, you can change the color of the loading character by adding colors.
+```{python}
+from tictronome import Colors
+
+Tic(color=Colors.CYAN)
+```
+![color_example](./assets/color_example.png)
