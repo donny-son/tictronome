@@ -4,7 +4,7 @@ We've all been there...staring at the empty terminal while your fans go crazy.
 I hope this relieves the intensity while you are waiting for that return statement.
 
 <img src="assets/simple-tics.gif" width="250"/>
-<img src="assets/seconds.gif" width="250"/>
+<!-- <img src="assets/seconds.gif" width="250"/> -->
 
 ## How To
 
