@@ -1,6 +1,6 @@
 import threading
 from typing import Optional
-from colors import Colors, ColoredString
+from .colors import Colors, ColoredString
 from time import sleep
 
 
@@ -69,8 +69,8 @@ class Tic:
 if __name__ == "__main__":
     import time
 
-    print("TEST RUN FOR 10 SECONDS")
+    print("TEST RUN FOR 5 SECONDS")
 
-    tc = Tic(color=Colors.CYAN).start()
+    tc = Tic(color=Colors.RED).start()
     time.sleep(5)
     tc.stop()
